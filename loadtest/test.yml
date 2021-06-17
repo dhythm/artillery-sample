@@ -1,0 +1,25 @@
+config:
+  target: "https://jsonplaceholder.typicode.com"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: Warm up
+    # - duration: 120
+    #   arrivalRate: 5
+    #   rampTo: 50
+    #   name: Ramp up load
+    # - duration: 600
+    #   arrivalRate: 50
+    #   name: Sustained load
+
+scenarios:
+  - name: "Sample scenario"
+    flow:
+      - get:
+          url: "/todos/1"
+          # json:
+          #   userId: "{{ userId }}"
+          capture:
+            - json: "$.title"
+              as: "title"
+      - log: "{{title}}"
